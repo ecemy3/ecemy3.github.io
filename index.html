@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0b0b">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ecem Yalçın</title>
 <meta property="og:title" content="Ecem Yalçın — AI Engineer">
@@ -311,9 +313,6 @@
     <a href="#experience">experience</a>
     <a href="#education" class="hide-sm">education</a>
     <a href="#contact">contact</a>
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-    </button>
   </div>
 </nav>
 
@@ -679,15 +678,6 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal:not(.hero .reveal)').forEach(el => io.observe(el));
-
-  // theme toggle
-  const root = document.documentElement;
-  try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
-  document.getElementById('themeBtn').addEventListener('click', () => {
-    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    root.dataset.theme = dark ? 'light' : 'dark';
-    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
-  });
 </script>
 </body>
 </html>
