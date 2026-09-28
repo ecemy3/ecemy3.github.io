@@ -159,6 +159,13 @@
   .t-gray { background: #f1f1f1; color: #111; }
   .t-gray .tag { background: #111; color: #fff; }
 
+  .emo-chips { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; margin: 26px 0 64px; }
+  .emo-chips span { font: 500 12px "Geist Mono", monospace; padding: 4px 10px; border-radius: 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); color: #e9e4ff; }
+  .emo-chips span:first-child { background: rgba(124,92,255,.35); border-color: rgba(169,150,255,.5); }
+  .coach { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 8px; padding: 0 22px; width: 100%; max-width: 340px; }
+  .coach .msg { background: #fff; border-radius: 12px 12px 12px 4px; padding: 8px 12px; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .coach .msg em { display: block; font: 500 11px "Geist Mono", monospace; color: #ea580c; font-style: normal; margin-top: 2px; }
+  .coach .tip { align-self: flex-end; background: #431407; color: #ffedd5; border-radius: 12px 12px 4px 12px; padding: 8px 12px; font-size: 12.5px; }
   .deco { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
   .bars { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; align-items: flex-end; height: 44px; opacity: .9; }
   .bars i { width: 5px; border-radius: 3px; background: currentColor; animation: eq 1.2s ease-in-out infinite; }
@@ -187,6 +194,7 @@
   .job ul { margin-top: 8px; padding-left: 18px; }
   .job li { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
   .job li::marker { color: var(--accent-deep); }
+  .job li strong { color: var(--fg); font-weight: 500; }
 
   /* education + leadership */
   .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -228,12 +236,34 @@
   .float-cta:hover { transform: translateY(-2px) scale(1.02); }
   .float-cta svg { width: 17px; height: 17px; }
 
+  /* intro */
+  #intro { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: grid; place-items: center;
+    transition: transform .9s cubic-bezier(.77,0,.18,1), opacity .9s; }
+  #intro.done { transform: translateY(-100%); }
+  #intro.gone { display: none; }
+  .intro-inner { text-align: center; padding: 0 16px; }
+  .intro-wave { display: flex; gap: 5px; justify-content: center; align-items: center; height: 48px; margin-bottom: 22px; }
+  .intro-wave i { width: 5px; height: calc(var(--h) * 100%); border-radius: 3px; background: var(--accent);
+    transform: scaleY(0); animation: bar-in .5s var(--d) cubic-bezier(.2,.9,.3,1.3) forwards, bar-pulse 1s calc(var(--d) + .5s) ease-in-out infinite alternate; }
+  @keyframes bar-in { to { transform: scaleY(1); } }
+  @keyframes bar-pulse { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+  .intro-title { font-size: clamp(30px, 6vw, 48px); font-weight: 700; letter-spacing: -.045em; opacity: 0; filter: blur(12px); transform: translateY(8px);
+    animation: blur-in .8s .45s ease forwards; }
+  .intro-title span { display: inline-block; animation: wave 1.8s 1s ease-in-out infinite; transform-origin: 70% 70%; }
+  .intro-sub { color: var(--muted); font-size: clamp(15px, 2.4vw, 18px); margin-top: 6px; opacity: 0; filter: blur(8px); animation: blur-in .8s 1s ease forwards; }
+  @keyframes blur-in { to { opacity: 1; filter: blur(0); transform: none; } }
+  body.intro-lock { overflow: hidden; }
+  .hero .reveal { filter: blur(8px); transition: opacity .8s ease, transform .8s ease, filter .8s ease; }
+  .hero .reveal.in { filter: none; }
+
   /* reveal */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
     .bars i, .avatar .wave-bars i { animation: none; }
+    #intro { display: none; }
+    .hero .reveal { filter: none; }
   }
 
   @media (max-width: 760px) {
@@ -252,6 +282,13 @@
 </style>
 </head>
 <body>
+<div id="intro" aria-hidden="true">
+  <div class="intro-inner">
+    <div class="intro-wave"><i style="--d:0s;--h:0.35"></i><i style="--d:0.08s;--h:0.6"></i><i style="--d:0.16s;--h:0.9"></i><i style="--d:0.24s;--h:0.55"></i><i style="--d:0.32s;--h:1"></i><i style="--d:0.4s;--h:0.7"></i><i style="--d:0.48s;--h:0.4"></i><i style="--d:0.56s;--h:0.8"></i><i style="--d:0.64s;--h:0.5"></i><i style="--d:0.72s;--h:0.95"></i><i style="--d:0.8s;--h:0.6"></i><i style="--d:0.88s;--h:0.3"></i></div>
+    <div class="intro-title">Merhaba, I'm Ecem <span>👋</span></div>
+    <div class="intro-sub">Welcome to my corner of the internet</div>
+  </div>
+</div>
 
 <nav>
   <a href="#top" class="brand">ecem y.</a>
@@ -282,8 +319,8 @@
     </div>
 
     <p class="lead reveal">
-      Currently building <strong>speech emotion recognition</strong> systems as an
-      <span class="hl">AI Engineer</span> at <strong>CallMetric AI</strong>. I work across the full ML lifecycle — from data sourcing and model training to running models on real production call data.
+      Currently building <strong>emotion AI</strong> as an
+      <span class="hl">AI Engineer</span> at <strong>CallMetric AI</strong> — in-vehicle emotion recognition, emotion analysis on call-center conversations and real-time live coaching for agents.
     </p>
     <p class="sub reveal">
       Computer Engineering graduate from Kocaeli University. I've worked on computer vision, medical imaging, LLM agents and real-time data pipelines — and I organize AI &amp; cloud events as part of Google Developer Groups Kocaeli.
@@ -353,6 +390,35 @@
   <section id="projects">
     <h2 class="sec-title reveal"><span class="slash">01</span>Projects</h2>
     <div class="projects">
+
+      <div class="project reveal">
+        <div class="thumb t-dark" style="background:radial-gradient(120% 90% at 50% 110%,#2a1a6e,#0d0d0d 70%)">
+          <span class="tag">CallMetric AI · In-Vehicle</span>
+          <div class="deco grid-bg" style="color:#7c5cff;opacity:.12"></div>
+          <div class="emo-chips"><span>😊 calm 0.82</span><span>😠 stress 0.11</span><span>😴 fatigue 0.07</span></div>
+          <div class="bars" style="color:#a996ff;height:34px;bottom:14px"><i style="animation-delay:0s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.5s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.45s"></i></div>
+        </div>
+        <div class="p-body">
+          <h4>In-Vehicle Emotion Recognition</h4>
+          <p>Emotion recognition for people inside the vehicle — understanding how the cabin feels, in real time.</p>
+          <div class="chips"><span class="chip">Emotion AI</span><span class="chip">PyTorch</span><span class="chip">Real-time</span></div>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="thumb t-orange">
+          <span class="tag">CallMetric AI · Call Center</span>
+          <div class="coach">
+            <div class="msg">“I've been waiting for 20 minutes…”<em>frustrated · 0.87</em></div>
+            <div class="tip">💡 Live coach: acknowledge the wait, slow your pace</div>
+          </div>
+        </div>
+        <div class="p-body">
+          <h4>Call-Center Emotion Analytics &amp; Live Coaching</h4>
+          <p>Transcribes calls with a fine-tuned Turkish Whisper + diarization, analyzes customer &amp; agent emotions and coaches agents live.</p>
+          <div class="chips"><span class="chip">Whisper ASR</span><span class="chip">SER</span><span class="chip">Sentiment</span><span class="chip">RabbitMQ</span><span class="chip">AWS</span></div>
+        </div>
+      </div>
 
       <a class="project reveal" href="https://github.com/ecemy3/Enterprise-AI-Document-Intelligence-Platform" target="_blank" rel="noopener">
         <div class="thumb t-dark">
@@ -431,18 +497,6 @@
       </div>
 
       <div class="project reveal">
-        <div class="thumb t-orange">
-          <span class="tag">Speech AI</span>
-          <div class="flow"><b>Whisper ASR</b>→<b>Diarization</b>→<b>SER</b></div>
-        </div>
-        <div class="p-body">
-          <h4>Speech Emotion Recognition Pipeline</h4>
-          <p>Predicts valence–arousal and emotion categories for customers and agents on production calls.</p>
-          <div class="chips"><span class="chip">Whisper</span><span class="chip">PyTorch</span><span class="chip">AWS</span><span class="chip">RabbitMQ</span></div>
-        </div>
-      </div>
-
-      <div class="project reveal">
         <div class="thumb t-rose">
           <span class="tag">Medical Imaging</span>
           <div class="big">Skin cancer<br>detection</div>
@@ -466,6 +520,9 @@
         <div class="job-head"><h4>CallMetric AI</h4><span class="meta">08/2026 – Present · Düzce, Türkiye</span></div>
         <div class="role">AI Engineer <span class="badge">now</span></div>
         <ul>
+          <li>Developing <strong>in-vehicle emotion recognition</strong> models that detect the emotional state of people inside the car.</li>
+          <li>Transcribing call-center audio and running emotion &amp; sentiment analysis on both the speech and the transcripts.</li>
+          <li>Building a <strong>live coaching</strong> system that guides call-center agents in real time based on the emotional flow of the conversation.</li>
           <li>Built an end-to-end speech emotion recognition pipeline, from data sourcing and preprocessing to model training, predicting valence–arousal and emotion categories.</li>
           <li>Integrated the models with a fine-tuned Turkish Whisper ASR and speaker diarization on production call data.</li>
           <li>Worked on AWS VMs over SSH, monitoring RabbitMQ request flows and CRM integration.</li>
@@ -541,7 +598,6 @@
     <a class="cta" href="mailto:ecemyalcin3434@gmail.com">Say hello →</a>
     <div class="contact-grid">
       <a class="contact-card" href="mailto:ecemyalcin3434@gmail.com"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div><div style="min-width:0"><small>EMAIL</small><span>ecemyalcin3434@gmail.com</span></div></a>
-      <a class="contact-card" href="tel:+905301359836"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></div><div style="min-width:0"><small>PHONE</small><span>+90 530 135 98 36</span></div></a>
       <div class="contact-card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div style="min-width:0"><small>LOCATION</small><span>Beşiktaş, İstanbul</span></div></div>
       <a class="contact-card" href="https://www.linkedin.com/in/ecem-yalcin/" target="_blank" rel="noopener"><div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg></div><div style="min-width:0"><small>LINKEDIN</small><span>in/ecem-yalcin</span></div></a>
       <a class="contact-card" href="https://github.com/ecemy3" target="_blank" rel="noopener"><div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></div><div style="min-width:0"><small>GITHUB</small><span>ecemy3</span></div></a>
@@ -554,11 +610,35 @@
 
 
 <script>
+  // intro: once per visit, click to skip
+  const intro = document.getElementById('intro');
+  let seen = false;
+  try { seen = sessionStorage.getItem('introSeen') === '1'; } catch (e) {}
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function startPage() {
+    document.body.classList.remove('intro-lock');
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => setTimeout(() => el.classList.add('in'), 120 * i));
+  }
+  if (seen || reduce) { intro.classList.add('gone'); startPage(); }
+  else {
+    document.body.classList.add('intro-lock');
+    let finished = false;
+    const finish = () => {
+      if (finished) return; finished = true;
+      try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+      intro.classList.add('done');
+      setTimeout(startPage, 350);
+      setTimeout(() => intro.classList.add('gone'), 1000);
+    };
+    setTimeout(finish, 2600);
+    intro.addEventListener('click', finish);
+  }
+
   // scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal:not(.hero .reveal)').forEach(el => io.observe(el));
 
   // theme toggle
   const root = document.documentElement;
