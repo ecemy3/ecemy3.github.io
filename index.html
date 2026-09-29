@@ -67,7 +67,7 @@
     background: var(--nav); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--line); box-shadow: var(--shadow);
   }
-  nav .brand { font-family: "Geist Mono", monospace; font-weight: 500; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+  nav .brand { font-family: "Geist Mono", monospace; font-weight: 500; font-size: 13px; display: flex; align-items: center; gap: 8px; white-space: nowrap; flex-shrink: 0; }
   nav .brand::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
   nav .links { display: flex; align-items: center; gap: 4px; }
   nav .links a { font-size: 14px; color: var(--muted); padding: 6px 10px; border-radius: 8px; transition: color .2s, background .2s; }
@@ -261,6 +261,42 @@
   .hero .reveal { filter: blur(8px); transition: opacity .8s ease, transform .8s ease, filter .8s ease; }
   .hero .reveal.in { filter: none; }
 
+  /* valence–arousal thumb */
+  .va { position: relative; z-index: 2; width: 150px; height: 110px; margin-top: 30px; }
+  .va-ax { position: absolute; background: rgba(169,150,255,.45); }
+  .va-x { left: 0; right: 0; top: 50%; height: 1px; }
+  .va-y { top: 0; bottom: 0; left: 50%; width: 1px; }
+  .va-l { position: absolute; font: 500 10px "Geist Mono", monospace; color: #a996ff; white-space: nowrap; }
+  .va-lx { right: -6px; top: calc(50% + 4px); }
+  .va-ly { left: calc(50% + 6px); top: -4px; }
+  .va-dot { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #c4b5fd;
+    box-shadow: 0 0 0 6px rgba(124,92,255,.25), 0 0 24px #7c5cff; animation: va-move 7s ease-in-out infinite; }
+  @keyframes va-move { 0%,100% { left: 68%; top: 30%; } 25% { left: 30%; top: 22%; } 50% { left: 36%; top: 70%; } 75% { left: 74%; top: 62%; } }
+  .read-more { margin-top: 12px; font-size: 13px; font-weight: 500; color: var(--accent-deep); }
+
+  /* case study modal */
+  .case { position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: grid; place-items: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity .25s; }
+  .case.open { opacity: 1; pointer-events: auto; }
+  .case-box { position: relative; width: min(760px, 100%); max-height: 100%; overflow-y: auto; background: var(--card); border: 1px solid var(--line);
+    border-radius: 20px; padding: 36px 36px 32px; box-shadow: 0 30px 80px rgba(0,0,0,.5); transform: translateY(12px); transition: transform .3s; }
+  .case.open .case-box { transform: none; }
+  .case-box .kicker { font-family: "Geist Mono", monospace; font-size: 12px; color: var(--accent-deep); letter-spacing: .06em; }
+  .case-box h3 { font-size: clamp(24px, 4vw, 32px); font-weight: 700; letter-spacing: -.035em; line-height: 1.15; margin-top: 8px; }
+  .case-box .intro { color: var(--muted); font-size: 16px; margin-top: 12px; }
+  .case-box h5 { font-family: "Geist Mono", monospace; font-size: 12px; font-weight: 500; letter-spacing: .08em; color: var(--soft); margin: 28px 0 12px; text-transform: uppercase; }
+  .case-steps { display: grid; gap: 10px; }
+  .case-step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: color-mix(in srgb, var(--fg) 2%, transparent); }
+  .case-step .n { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font: 500 13px "Geist Mono", monospace;
+    background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent-deep); }
+  .case-step b { display: block; font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .case-step p { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .case-lesson { margin-top: 10px; padding: 18px 20px; border-radius: 14px; border-left: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent); font-size: 15px; line-height: 1.6; }
+  .case-close { position: sticky; top: 0; float: right; margin: -18px -18px 0 0; width: 34px; height: 34px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--fg); cursor: pointer; font-size: 14px; z-index: 2; }
+  @media (max-width: 560px) { .case-box { padding: 28px 20px 24px; } .case-close { margin: -12px -8px 0 0; } }
+
   /* booking modal */
   #booking { position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     display: grid; place-items: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -277,7 +313,7 @@
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
-    .bars i, .avatar .wave-bars i { animation: none; }
+    .bars i, .avatar .wave-bars i, .va-dot { animation: none; }
     #intro { display: none; }
     .hero .reveal { filter: none; }
   }
@@ -291,6 +327,8 @@
     .skills { grid-template-columns: 1fr 1fr; }
     .projects, .duo { grid-template-columns: 1fr; }
     nav .links a.hide-sm { display: none; }
+    nav .links a { padding: 6px 7px; font-size: 13px; }
+    nav .links { gap: 0; }
     nav { padding-left: 16px; }
     .float-cta span { display: none; }
     .float-cta { padding: 14px; }
@@ -403,19 +441,23 @@
     <h2 class="sec-title reveal"><span class="slash">01</span>Projects</h2>
     <div class="projects">
 
-      <div class="project reveal">
+      <a class="project reveal" href="#case-ser" data-case="case-ser">
         <div class="thumb t-dark" style="background:radial-gradient(120% 90% at 50% 110%,#2a1a6e,#0d0d0d 70%)">
-          <span class="tag">CallMetric AI · In-Vehicle</span>
+          <span class="tag">CallMetric AI · Case study</span>
           <div class="deco grid-bg" style="color:#7c5cff;opacity:.12"></div>
-          <div class="emo-chips"><span>😊 calm 0.82</span><span>😠 stress 0.11</span><span>😴 fatigue 0.07</span></div>
-          <div class="bars" style="color:#a996ff;height:34px;bottom:14px"><i style="animation-delay:0s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.5s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.45s"></i></div>
+          <div class="va">
+            <span class="va-ax va-x"></span><span class="va-ax va-y"></span>
+            <span class="va-l va-lx">valence →</span><span class="va-l va-ly">arousal ↑</span>
+            <span class="va-dot"></span>
+          </div>
         </div>
         <div class="p-body">
-          <h4>In-Vehicle Emotion Recognition</h4>
-          <p>Emotion recognition for people inside the vehicle — understanding how the cabin feels, in real time.</p>
-          <div class="chips"><span class="chip">Emotion AI</span><span class="chip">PyTorch</span><span class="chip">Real-time</span></div>
+          <h4>In-Vehicle Speech Emotion Recognition <span class="arrow">→</span></h4>
+          <p>Continuous valence–arousal prediction from speech, built for robustness in noisy, real-world cabin conditions.</p>
+          <div class="chips"><span class="chip">Whisper</span><span class="chip">Wav2Vec2</span><span class="chip">CCC</span><span class="chip">Noise augmentation</span><span class="chip">Cross-lingual</span></div>
+          <span class="read-more">Read case study →</span>
         </div>
-      </div>
+      </a>
 
       <div class="project reveal">
         <div class="thumb t-orange">
@@ -532,7 +574,7 @@
         <div class="job-head"><h4>CallMetric AI</h4><span class="meta">08/2026 – Present · Düzce, Türkiye</span></div>
         <div class="role">AI Engineer <span class="badge">now</span></div>
         <ul>
-          <li>Developing <strong>in-vehicle emotion recognition</strong> models that detect the emotional state of people inside the car.</li>
+          <li>Developing <strong>in-vehicle speech emotion recognition</strong> as continuous valence–arousal prediction — benchmarking Whisper, Wav2Vec2 and emotion-specific encoders, with noise-augmented training and English/French cross-lingual evaluation.</li>
           <li>Transcribing call-center audio and running emotion &amp; sentiment analysis on both the speech and the transcripts.</li>
           <li>Building a <strong>live coaching</strong> system that guides call-center agents in real time based on the emotional flow of the conversation.</li>
           <li>Built an end-to-end speech emotion recognition pipeline, from data sourcing and preprocessing to model training, predicting valence–arousal and emotion categories.</li>
@@ -621,6 +663,28 @@
 
 
 
+<div class="case" id="case-ser" role="dialog" aria-modal="true" aria-labelledby="case-ser-title">
+  <div class="case-box">
+    <button class="case-close" aria-label="Close">✕</button>
+    <div class="kicker">CASE STUDY · CALLMETRIC AI</div>
+    <h3 id="case-ser-title">In-Vehicle Speech Emotion Recognition</h3>
+    <p class="intro">Speech emotion recognition framed as <strong>continuous valence–arousal (VA) prediction</strong> rather than categorical classification. The focus wasn't just accuracy — it was robustness under real-world conditions.</p>
+
+    <h5>What I did</h5>
+    <div class="case-steps">
+      <div class="case-step"><span class="n">01</span><div><b>Encoder benchmarking</b><p>Compared transformer-based audio encoder architectures — Whisper, Wav2Vec2 and emotion-specific pretrained backbones.</p></div></div>
+      <div class="case-step"><span class="n">02</span><div><b>Noise robustness</b><p>Designed noise-augmentation training strategies for robustness to real-world background noise, and systematically analyzed the clean-accuracy vs. noise-robustness trade-off.</p></div></div>
+      <div class="case-step"><span class="n">03</span><div><b>Cross-lingual generalization</b><p>Evaluated zero-shot cross-lingual generalization across English and French.</p></div></div>
+      <div class="case-step"><span class="n">04</span><div><b>End-to-end model selection</b><p>Built the selection process around CCC (concordance correlation coefficient) evaluation, freeze-depth ablation sweeps, and latency / footprint benchmarking.</p></div></div>
+    </div>
+
+    <h5>Key lesson</h5>
+    <div class="case-lesson">A model being <strong>“good on clean data”</strong> and being <strong>“production-reliable”</strong> are very different claims. Closing that gap takes rigorous ablation work — and the discipline to report honest negative results, not just the wins.</div>
+
+    <div class="chips" style="margin-top:22px"><span class="chip">PyTorch</span><span class="chip">Whisper</span><span class="chip">Wav2Vec2</span><span class="chip">Valence–Arousal</span><span class="chip">CCC</span><span class="chip">Noise augmentation</span><span class="chip">Ablation studies</span><span class="chip">Latency benchmarking</span></div>
+  </div>
+</div>
+
 <div id="booking" role="dialog" aria-modal="true" aria-label="Book a meeting">
   <div class="booking-box">
     <button class="booking-close" aria-label="Close">✕</button>
@@ -648,6 +712,16 @@
   document.querySelectorAll('.book').forEach(el => { el.href = BOOKING_URL + '?hl=en'; el.target = '_blank'; el.rel = 'noopener'; el.addEventListener('click', openBooking); });
   modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('.booking-close')) closeBooking(); });
   addEventListener('keydown', e => { if (e.key === 'Escape') closeBooking(); });
+
+  // case study popups
+  document.querySelectorAll('[data-case]').forEach(card => card.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById(card.dataset.case).classList.add('open'); document.body.style.overflow = 'hidden';
+  }));
+  document.querySelectorAll('.case').forEach(c => c.addEventListener('click', e => {
+    if (e.target === c || e.target.closest('.case-close')) { c.classList.remove('open'); document.body.style.overflow = ''; }
+  }));
+  addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.case.open').forEach(c => { c.classList.remove('open'); document.body.style.overflow = ''; }); });
 
   // intro: once per visit, click to skip
   const intro = document.getElementById('intro');
