@@ -329,6 +329,21 @@
   @media (max-width: 900px) { .repos { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .repos { grid-template-columns: 1fr; } }
 
+  /* speaking */
+  .talks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .talk { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: transform .25s, border-color .25s; }
+  a.talk:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
+  .talk-img { height: 330px; overflow: hidden; background: #111; }
+  .talk-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transition: transform .5s; }
+  .talk:hover .talk-img img { transform: scale(1.03); }
+  .talk-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+  .talk-body .kicker { font-family: "Geist Mono", monospace; font-size: 11px; color: var(--accent-deep); letter-spacing: .06em; }
+  .talk-body h4 { font-size: 17px; font-weight: 600; letter-spacing: -.02em; margin-top: 6px; display: flex; justify-content: space-between; gap: 8px; }
+  .talk-body h4 .arrow { color: var(--soft); }
+  .talk-body p { font-size: 14px; color: var(--muted); margin-top: 6px; }
+  .role-pill { align-self: flex-start; margin-top: 14px; font: 500 11px "Geist Mono", monospace; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent-deep); }
+  @media (max-width: 760px) { .talks { grid-template-columns: 1fr; } .talk-img { height: 260px; } }
+
   /* booking modal */
   #booking { position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     display: grid; place-items: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -381,7 +396,7 @@
     <a href="#about">about</a>
     <a href="#projects">projects</a>
     <a href="#experience">experience</a>
-    <a href="#education" class="hide-sm">education</a>
+    <a href="#speaking" class="hide-sm">speaking</a>
     <a href="#contact">contact</a>
   </div>
 </nav>
@@ -423,49 +438,6 @@
       </a>
     </div>
 
-    <div class="skills reveal">
-      <div>
-        <h3>AI / ML</h3>
-        <ul>
-          <li>PyTorch, Scikit-learn</li>
-          <li>CNN, CRNN, Transformers</li>
-          <li>YOLOv8, OpenCV</li>
-          <li>LLMs, RAG</li>
-          <li>Whisper, Audio Processing</li>
-          <li>Speech Emotion Recognition</li>
-        </ul>
-      </div>
-      <div>
-        <h3>DATA</h3>
-        <ul>
-          <li>Kafka, Spark</li>
-          <li>Delta Lake, MLflow</li>
-          <li>Pandas, NumPy</li>
-          <li>SQL, EDA</li>
-          <li>Feature Engineering</li>
-        </ul>
-      </div>
-      <div>
-        <h3>BACKEND</h3>
-        <ul>
-          <li>FastAPI, Python</li>
-          <li>ASP.NET Core, C#</li>
-          <li>PostgreSQL, MSSQL</li>
-          <li>RabbitMQ, Redis</li>
-          <li>Clean Architecture</li>
-        </ul>
-      </div>
-      <div>
-        <h3>INFRA &amp; AGENTS</h3>
-        <ul>
-          <li>AWS, SSH</li>
-          <li>Docker</li>
-          <li>LangGraph, Qdrant</li>
-          <li>Gemini, FLUX.1</li>
-          <li>Git, GitHub</li>
-        </ul>
-      </div>
-    </div>
   </header>
 
   <!-- PROJECTS -->
@@ -639,8 +611,8 @@
         <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>AI & ML</span></div>
       </a>
       <a class="repo" data-cat="ai" href="https://github.com/ecemy3/Google-bwai" target="_blank" rel="noopener">
-        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Build with AI — Decision Engines</h4><span class="arrow">↗</span></div>
-        <p>Slides from my Build with AI session: designing decision engines with vibe coding.</p>
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Build with AI Türkiye — Talk Slides</h4><span class="arrow">↗</span></div>
+        <p>Slides from my Build with AI Türkiye 2026 training: designing smart decision engines with vibe coding.</p>
         <div class="repo-meta"><span><i style="background:#d97706"></i>Slides</span><span>AI & ML</span></div>
       </a>
       <a class="repo" data-cat="data" href="https://github.com/ecemy3/fintech-credit-risk-engine" target="_blank" rel="noopener">
@@ -718,8 +690,55 @@
   </section>
 
   <!-- EXPERIENCE -->
+  <section id="skills">
+    <h2 class="sec-title reveal"><span class="slash">02</span>Skills</h2>
+    <div class="skills reveal" style="margin-top:0">
+      <div>
+        <h3>AI / ML</h3>
+        <ul>
+          <li>PyTorch, Scikit-learn</li>
+          <li>CNN, CRNN, Transformers</li>
+          <li>YOLOv8, OpenCV</li>
+          <li>LLMs, RAG</li>
+          <li>Whisper, Audio Processing</li>
+          <li>Speech Emotion Recognition</li>
+        </ul>
+      </div>
+      <div>
+        <h3>DATA</h3>
+        <ul>
+          <li>Kafka, Spark</li>
+          <li>Delta Lake, MLflow</li>
+          <li>Pandas, NumPy</li>
+          <li>SQL, EDA</li>
+          <li>Feature Engineering</li>
+        </ul>
+      </div>
+      <div>
+        <h3>BACKEND</h3>
+        <ul>
+          <li>FastAPI, Python</li>
+          <li>ASP.NET Core, C#</li>
+          <li>PostgreSQL, MSSQL</li>
+          <li>RabbitMQ, Redis</li>
+          <li>Clean Architecture</li>
+        </ul>
+      </div>
+      <div>
+        <h3>INFRA &amp; AGENTS</h3>
+        <ul>
+          <li>AWS, SSH</li>
+          <li>Docker</li>
+          <li>LangGraph, Qdrant</li>
+          <li>Gemini, FLUX.1</li>
+          <li>Git, GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section id="experience">
-    <h2 class="sec-title reveal"><span class="slash">02</span>Career</h2>
+    <h2 class="sec-title reveal"><span class="slash">03</span>Career</h2>
     <div class="timeline">
 
       <div class="job current reveal">
@@ -772,8 +791,32 @@
   </section>
 
   <!-- EDUCATION & LEADERSHIP -->
+  <section id="speaking">
+    <h2 class="sec-title reveal"><span class="slash">04</span>Speaking</h2>
+    <div class="talks">
+      <a class="talk reveal" href="https://github.com/ecemy3/Google-bwai" target="_blank" rel="noopener">
+        <div class="talk-img"><img style="object-position:center 18%" src="img/talk-build-with-ai.jpg" alt="Build with AI Türkiye 2026 poster — Ecem Yalçın" loading="lazy"></div>
+        <div class="talk-body">
+          <div class="kicker">BUILD WITH AI TÜRKİYE · MAY 2026</div>
+          <h4>Designing Smart Decision Engines with Vibe Coding <span class="arrow">↗</span></h4>
+          <p>Speaker &amp; instructor — hands-on training session for Google Developer Communities Turkey.</p>
+          <span class="role-pill">Speaker · Instructor</span>
+        </div>
+      </a>
+      <div class="talk reveal">
+        <div class="talk-img"><img src="img/talk-gdg-in-woman.jpg" alt="GDG in Woman 2026 poster — Ecem Yalçın" loading="lazy"></div>
+        <div class="talk-body">
+          <div class="kicker">GDG ON CAMPUS DÜZCE UNIVERSITY · 2026</div>
+          <h4>GDG in Woman — Women in Tech</h4>
+          <p>Speaker on data science &amp; AI, sharing my journey as a GDG Kocaeli organizer.</p>
+          <span class="role-pill">Speaker</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="education">
-    <h2 class="sec-title reveal"><span class="slash">03</span>Education &amp; Community</h2>
+    <h2 class="sec-title reveal"><span class="slash">05</span>Education &amp; Community</h2>
     <div class="duo">
       <div class="panel reveal">
         <div class="kicker">09/2022 – 06/2026</div>
@@ -790,7 +833,7 @@
   </section>
 
   <section id="interests">
-    <h2 class="sec-title reveal"><span class="slash">04</span>Interests</h2>
+    <h2 class="sec-title reveal"><span class="slash">06</span>Interests</h2>
     <div class="interests reveal">
       <span>Computer Vision</span><span>Speech AI</span><span>Generative AI</span><span>LLMs</span>
       <span>Data Engineering</span><span>Multi-Agent Systems</span><span>MLOps</span><span>Manufacturing Automation</span>
