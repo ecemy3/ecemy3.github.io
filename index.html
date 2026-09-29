@@ -297,6 +297,13 @@
     background: var(--bg); color: var(--fg); cursor: pointer; font-size: 14px; z-index: 2; }
   @media (max-width: 560px) { .case-box { padding: 28px 20px 24px; } .case-close { margin: -12px -8px 0 0; } }
 
+  .case-p { font-size: 15px; color: var(--muted); margin-top: 12px; }
+  .case-p strong, .case-p em { color: var(--fg); font-weight: 500; font-style: normal; }
+  .case-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: 500 12px "Geist Mono", monospace; color: var(--soft); }
+  .case-flow span { padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line); color: var(--fg); background: color-mix(in srgb, var(--fg) 3%, transparent); }
+  .case-flow span:last-child { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .case-note { margin-top: 18px; font-size: 13px; color: var(--soft); }
+
   /* booking modal */
   #booking { position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     display: grid; place-items: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -459,20 +466,21 @@
         </div>
       </a>
 
-      <div class="project reveal">
+      <a class="project reveal" href="#case-cc" data-case="case-cc">
         <div class="thumb t-orange">
-          <span class="tag">CallMetric AI · Call Center</span>
+          <span class="tag">CallMetric AI · Case study</span>
           <div class="coach">
             <div class="msg">“I've been waiting for 20 minutes…”<em>frustrated · 0.87</em></div>
             <div class="tip">💡 Live coach: acknowledge the wait, slow your pace</div>
           </div>
         </div>
         <div class="p-body">
-          <h4>Call-Center Emotion Analytics &amp; Live Coaching</h4>
-          <p>Transcribes calls with a fine-tuned Turkish Whisper + diarization, analyzes customer &amp; agent emotions and coaches agents live.</p>
-          <div class="chips"><span class="chip">Whisper ASR</span><span class="chip">SER</span><span class="chip">Sentiment</span><span class="chip">RabbitMQ</span><span class="chip">AWS</span></div>
+          <h4>Call-Center Emotion Analytics &amp; Live Coaching <span class="arrow">→</span></h4>
+          <p>Real-time call analysis combining speech-to-text with emotion understanding — and coaching agents while the call is still happening.</p>
+          <div class="chips"><span class="chip">Turkish Whisper</span><span class="chip">Diarization</span><span class="chip">Streaming inference</span><span class="chip">Emotion AI</span></div>
+          <span class="read-more">Read case study →</span>
         </div>
-      </div>
+      </a>
 
       <a class="project reveal" href="https://github.com/ecemy3/Enterprise-AI-Document-Intelligence-Platform" target="_blank" rel="noopener">
         <div class="thumb t-dark">
@@ -682,6 +690,31 @@
     <div class="case-lesson">A model being <strong>“good on clean data”</strong> and being <strong>“production-reliable”</strong> are very different claims. Closing that gap takes rigorous ablation work — and the discipline to report honest negative results, not just the wins.</div>
 
     <div class="chips" style="margin-top:22px"><span class="chip">PyTorch</span><span class="chip">Whisper</span><span class="chip">Wav2Vec2</span><span class="chip">Valence–Arousal</span><span class="chip">CCC</span><span class="chip">Noise augmentation</span><span class="chip">Ablation studies</span><span class="chip">Latency benchmarking</span></div>
+  </div>
+</div>
+
+<div class="case" id="case-cc" role="dialog" aria-modal="true" aria-labelledby="case-cc-title">
+  <div class="case-box">
+    <button class="case-close" aria-label="Close">✕</button>
+    <div class="kicker">CASE STUDY · CALLMETRIC AI</div>
+    <h3 id="case-cc-title">Call-Center Emotion Analytics &amp; Live Coaching</h3>
+    <p class="intro">A real-time call analysis system combining <strong>speech-to-text</strong> with <strong>emotion understanding</strong> for customer service operations.</p>
+
+    <h5>How it works</h5>
+    <div class="case-flow"><span>Live call audio</span>→<span>Turkish ASR</span>→<span>Diarization</span>→<span>Emotion trajectory</span>→<span>Live coaching</span></div>
+    <p class="case-p">Calls are transcribed using a fine-tuned Turkish ASR model, with speaker diarization separating customer and agent turns. On top of the transcript, an emotion analysis layer tracks the <strong>emotional trajectory of both parties</strong> throughout the call — surfacing moments of frustration, escalation or de-escalation <em>as they happen</em>, not just in a post-call summary.</p>
+    <p class="case-p">The live-coaching component turns this into an operational tool: agents receive real-time signals during the call, so they can adjust tone or approach in the moment instead of learning about a bad interaction after the fact.</p>
+
+    <h5>Key technical pieces</h5>
+    <div class="case-steps">
+      <div class="case-step"><span class="n">01</span><div><b>Fine-tuned Turkish Whisper</b><p>Domain-specific fine-tuning for transcription accuracy on real call-center Turkish.</p></div></div>
+      <div class="case-step"><span class="n">02</span><div><b>Speaker diarization</b><p>Attributes the emotional signal correctly between customer and agent.</p></div></div>
+      <div class="case-step"><span class="n">03</span><div><b>Streaming inference pipeline</b><p>Real-time analysis during the call — not just batch / offline processing.</p></div></div>
+      <div class="case-step"><span class="n">04</span><div><b>Actionable emotion modeling</b><p>Designed to drive decisions mid-call, not only to describe what happened afterwards.</p></div></div>
+    </div>
+
+    <div class="chips" style="margin-top:22px"><span class="chip">Whisper</span><span class="chip">ASR fine-tuning</span><span class="chip">Speaker diarization</span><span class="chip">Emotion recognition</span><span class="chip">Streaming</span><span class="chip">RabbitMQ</span><span class="chip">AWS</span></div>
+    <p class="case-note">🔒 Built as part of client / company work — source code and internal implementation details are not public due to confidentiality.</p>
   </div>
 </div>
 
