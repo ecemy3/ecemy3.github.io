@@ -304,6 +304,31 @@
   .case-flow span:last-child { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   .case-note { margin-top: 18px; font-size: 13px; color: var(--soft); }
 
+  /* more on github */
+  .lv-fps { position: absolute; right: 12px; bottom: 12px; z-index: 3; font: 500 11px "Geist Mono", monospace; padding: 3px 8px; border-radius: 6px; background: rgba(255,255,255,.1); color: #cbd5e1; }
+  .more-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 48px 0 16px; }
+  .more-head h3 { font-size: 20px; font-weight: 700; letter-spacing: -.03em; }
+  .filters { display: flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .filters button { border: none; background: none; color: var(--muted); font: 500 13px "Geist", sans-serif; padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: all .2s; }
+  .filters button:hover { color: var(--fg); }
+  .filters button.on { background: var(--accent); color: var(--accent-ink); }
+  .repos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .repo { display: flex; flex-direction: column; padding: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; transition: border-color .2s, transform .2s; }
+  .repo:hover { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); transform: translateY(-2px); }
+  .repo[hidden] { display: none; }
+  .repo-top { display: flex; align-items: center; gap: 8px; }
+  .repo-top svg { width: 15px; height: 15px; color: var(--soft); flex-shrink: 0; }
+  .repo-top h4 { font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; flex: 1; min-width: 0; }
+  .repo-top .arrow { color: var(--soft); transition: transform .2s, color .2s; }
+  .repo:hover .arrow { color: var(--accent-deep); transform: translate(2px,-2px); }
+  .repo p { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; flex: 1; }
+  .repo-meta { display: flex; justify-content: space-between; margin-top: 12px; font: 500 11px "Geist Mono", monospace; color: var(--soft); }
+  .repo-meta i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .more-foot { margin-top: 16px; text-align: center; font-size: 14px; }
+  .more-foot a { color: var(--accent-deep); }
+  @media (max-width: 900px) { .repos { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .repos { grid-template-columns: 1fr; } }
+
   /* booking modal */
   #booking { position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     display: grid; place-items: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -507,17 +532,17 @@
         </div>
       </a>
 
-      <a class="project reveal" href="https://github.com/ecemy3/ai-research-agent" target="_blank" rel="noopener">
+      <div class="project reveal">
         <div class="thumb t-violet">
           <span class="tag">Multi-Agent</span>
           <div class="flow"><b>Planner</b>→<b>Researcher</b>→<b>Writer</b></div>
         </div>
         <div class="p-body">
-          <h4>AI Research Agent <span class="arrow">↗</span></h4>
+          <h4>AI Research Agent</h4>
           <p>RAG-based multi-agent assistant that automates literature research and report generation.</p>
           <div class="chips"><span class="chip">LangGraph</span><span class="chip">FastAPI</span><span class="chip">LLMs</span></div>
         </div>
-      </a>
+      </div>
 
       <a class="project reveal" href="https://github.com/ecemy3/gemini-doc-explainer-api" target="_blank" rel="noopener">
         <div class="thumb t-blue">
@@ -528,6 +553,20 @@
           <h4>Gemini Document Explainer API <span class="arrow">↗</span></h4>
           <p>Document Q&amp;A with chunking, embeddings and cosine-similarity semantic retrieval.</p>
           <div class="chips"><span class="chip">Gemini</span><span class="chip">FastAPI</span><span class="chip">RAG</span></div>
+        </div>
+      </a>
+
+      <a class="project reveal" href="https://github.com/ecemy3/litevision-studio" target="_blank" rel="noopener">
+        <div class="thumb t-gray" style="background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0">
+          <span class="tag" style="background:#3178c6;color:#fff">WebGPU · In-browser</span>
+          <div class="bbox" style="left:18%;top:26%;width:30%;height:44%;border-color:#60a5fa"><span style="background:#60a5fa">person 0.97</span></div>
+          <div class="bbox" style="left:58%;top:46%;width:22%;height:30%;border-color:#60a5fa"><span style="background:#60a5fa">hand 0.92</span></div>
+          <div class="lv-fps">60 FPS · 8 ms</div>
+        </div>
+        <div class="p-body">
+          <h4>LiteVision Studio <span class="arrow">↗</span></h4>
+          <p>Browser-based computer-vision playground — object, hand, face, pose and OCR detection running fully client-side, with FPS and latency benchmarking.</p>
+          <div class="chips"><span class="chip">LiteRT.js</span><span class="chip">WebGPU</span><span class="chip">MediaPipe</span><span class="chip">TypeScript</span></div>
         </div>
       </a>
 
@@ -544,7 +583,7 @@
         </div>
       </div>
 
-      <div class="project reveal">
+      <a class="project reveal" href="https://github.com/ecemy3/Fish_Object_Trackig_yolo_deepsort" target="_blank" rel="noopener">
         <div class="thumb t-dark" style="background:linear-gradient(180deg,#06243a,#0a3d5c)">
           <span class="tag">93.5% mAP@50</span>
           <div class="bbox" style="left:22%;top:34%;width:26%;height:26%"><span>fish 0.94</span></div>
@@ -552,11 +591,11 @@
           <div class="bbox" style="left:40%;top:70%;width:16%;height:16%"><span>id:7</span></div>
         </div>
         <div class="p-body">
-          <h4>Fish Detection &amp; Tracking</h4>
+          <h4>Fish Detection &amp; Tracking <span class="arrow">↗</span></h4>
           <p>YOLOv8 + ByteTrack system with 93.5% mAP@50, 91.3% precision and 88.1% recall.</p>
           <div class="chips"><span class="chip">YOLOv8</span><span class="chip">ByteTrack</span><span class="chip">OpenCV</span></div>
         </div>
-      </div>
+      </a>
 
       <div class="project reveal">
         <div class="thumb t-rose">
@@ -571,6 +610,111 @@
       </div>
 
     </div>
+
+    <div class="more-head reveal">
+      <h3>More on GitHub</h3>
+      <div class="filters" role="tablist">
+        <button class="on" data-f="all">All</button><button data-f="ai">AI &amp; ML</button><button data-f="data">Data</button><button data-f="software">Software</button>
+      </div>
+    </div>
+    <div class="repos reveal">
+      <a class="repo" data-cat="ai" href="https://github.com/ecemy3/bird-species-detection-vision" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Bird Species Detection</h4><span class="arrow">↗</span></div>
+        <p>Bird species detection and fine-grained classification with multi-step preprocessing and multi-architecture training pipelines.</p>
+        <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>AI & ML</span></div>
+      </a>
+      <a class="repo" data-cat="ai" href="https://github.com/ecemy3/Detecting-Parkinson-s-Disease" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Parkinson&#x27;s Disease Detection</h4><span class="arrow">↗</span></div>
+        <p>ML on biomedical voice data — disease classification and symptom-score regression with scikit-learn and XGBoost.</p>
+        <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>AI & ML</span></div>
+      </a>
+      <a class="repo" data-cat="ai" href="https://github.com/ecemy3/Detecting-Fake-News" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Fake News Detection</h4><span class="arrow">↗</span></div>
+        <p>Machine-learning model for fake-news detection, with a Streamlit interface for real-time testing.</p>
+        <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>AI & ML</span></div>
+      </a>
+      <a class="repo" data-cat="ai" href="https://github.com/ecemy3/mini-rag-gemini" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Mini RAG with Gemini</h4><span class="arrow">↗</span></div>
+        <p>Minimal RAG pipeline using Gemini embeddings, vector-store search and context-aware answering.</p>
+        <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>AI & ML</span></div>
+      </a>
+      <a class="repo" data-cat="ai" href="https://github.com/ecemy3/Google-bwai" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Build with AI — Decision Engines</h4><span class="arrow">↗</span></div>
+        <p>Slides from my Build with AI session: designing decision engines with vibe coding.</p>
+        <div class="repo-meta"><span><i style="background:#d97706"></i>Slides</span><span>AI & ML</span></div>
+      </a>
+      <a class="repo" data-cat="data" href="https://github.com/ecemy3/fintech-credit-risk-engine" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Fintech Credit Risk Engine</h4><span class="arrow">↗</span></div>
+        <p>Distributed data processing and credit-risk modeling on the Lending Club dataset.</p>
+        <div class="repo-meta"><span><i style="background:#DA5B0B"></i>Jupyter Notebook</span><span>Data</span></div>
+      </a>
+      <a class="repo" data-cat="data" href="https://github.com/ecemy3/Decolabs-InternShip" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>DecodeLabs Internship</h4><span class="arrow">↗</span></div>
+        <p>Data-science experiments, analyses and projects from my DecodeLabs internship.</p>
+        <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>Data</span></div>
+      </a>
+      <a class="repo" data-cat="data" href="https://github.com/ecemy3/Birth-Rate-Analysis" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Birth Rate Analysis</h4><span class="arrow">↗</span></div>
+        <p>US birth data — feature engineering, anomaly detection, forecasting with Prophet &amp; ARIMA, and statistical testing.</p>
+        <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>Data</span></div>
+      </a>
+      <a class="repo" data-cat="data" href="https://github.com/ecemy3/President-Heights" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>President Heights</h4><span class="arrow">↗</span></div>
+        <p>Exploratory analysis with visualizations and regression / classification models on US presidents&#x27; heights.</p>
+        <div class="repo-meta"><span><i style="background:#3572A5"></i>Python</span><span>Data</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/Enterprise-AI-Document-Intelligence-Platform" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Enterprise AI Document Intelligence</h4><span class="arrow">↗</span></div>
+        <p>AI document processing platform on ASP.NET Core with RAG, Qdrant and RabbitMQ.</p>
+        <div class="repo-meta"><span><i style="background:#178600"></i>C#</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/EventHub" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>EventHub</h4><span class="arrow">↗</span></div>
+        <p>ASP.NET MVC event management app — authentication, categories, messaging and interactive maps.</p>
+        <div class="repo-meta"><span><i style="background:#f1e05a"></i>JavaScript</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/OrderManagement" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Order Management</h4><span class="arrow">↗</span></div>
+        <p>C# WinForms app for customer orders, inventory tracking and admin operations on SQL Server.</p>
+        <div class="repo-meta"><span><i style="background:#178600"></i>C#</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/RecipeSuggestion" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Recipe Suggestion</h4><span class="arrow">↗</span></div>
+        <p>C# WinForms app to add, edit, search and manage recipes and their ingredients.</p>
+        <div class="repo-meta"><span><i style="background:#178600"></i>C#</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/Veri-Avcisi-Excel-PDF-Reader" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Veri Avcısı</h4><span class="arrow">↗</span></div>
+        <p>Upload Excel and PDF files and search through your data.</p>
+        <div class="repo-meta"><span><i style="background:#f1e05a"></i>JavaScript</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/autonomous-treasure-hunter" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Autonomous Treasure Hunter</h4><span class="arrow">↗</span></div>
+        <p>An autonomous treasure hunter built in C#.</p>
+        <div class="repo-meta"><span><i style="background:#178600"></i>C#</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/ProLab1" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Parceling Project</h4><span class="arrow">↗</span></div>
+        <p>Parceling project built in C++.</p>
+        <div class="repo-meta"><span><i style="background:#f34b7d"></i>C++</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/idman-projesi-oop" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Sports Program (OOP)</h4><span class="arrow">↗</span></div>
+        <p>Object-oriented sports program in Java.</p>
+        <div class="repo-meta"><span><i style="background:#b07219"></i>Java</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/k-t-phane" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Library App</h4><span class="arrow">↗</span></div>
+        <p>Library app written in C.</p>
+        <div class="repo-meta"><span><i style="background:#8a8a8a"></i>C</span><span>Software</span></div>
+      </a>
+      <a class="repo" data-cat="software" href="https://github.com/ecemy3/cardgame" target="_blank" rel="noopener">
+        <div class="repo-top"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.06A2.49 2.49 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71c.3-.13.64-.21 1-.21h8Z"/></svg><h4>Card Game</h4><span class="arrow">↗</span></div>
+        <p>A simple card game in C.</p>
+        <div class="repo-meta"><span><i style="background:#8a8a8a"></i>C</span><span>Software</span></div>
+      </a>
+    </div>
+    <p class="more-foot reveal"><a href="https://github.com/ecemy3?tab=repositories" target="_blank" rel="noopener">See everything on github.com/ecemy3 ↗</a></p>
   </section>
 
   <!-- EXPERIENCE -->
@@ -690,6 +834,7 @@
     <div class="case-lesson">A model being <strong>“good on clean data”</strong> and being <strong>“production-reliable”</strong> are very different claims. Closing that gap takes rigorous ablation work — and the discipline to report honest negative results, not just the wins.</div>
 
     <div class="chips" style="margin-top:22px"><span class="chip">PyTorch</span><span class="chip">Whisper</span><span class="chip">Wav2Vec2</span><span class="chip">Valence–Arousal</span><span class="chip">CCC</span><span class="chip">Noise augmentation</span><span class="chip">Ablation studies</span><span class="chip">Latency benchmarking</span></div>
+    <p class="case-note">🔒 Built as part of client / company work — source code and internal implementation details are not public due to confidentiality.</p>
   </div>
 </div>
 
@@ -745,6 +890,12 @@
   document.querySelectorAll('.book').forEach(el => { el.href = BOOKING_URL + '?hl=en'; el.target = '_blank'; el.rel = 'noopener'; el.addEventListener('click', openBooking); });
   modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('.booking-close')) closeBooking(); });
   addEventListener('keydown', e => { if (e.key === 'Escape') closeBooking(); });
+
+  // repo filters
+  document.querySelectorAll('.filters button').forEach(btn => btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b => b.classList.toggle('on', b === btn));
+    document.querySelectorAll('.repo').forEach(r => { r.hidden = btn.dataset.f !== 'all' && r.dataset.cat !== btn.dataset.f; });
+  }));
 
   // case study popups
   document.querySelectorAll('[data-case]').forEach(card => card.addEventListener('click', e => {
