@@ -953,10 +953,70 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') closeBooking(); });
 
   // repo filters
+  let activeFilter = 'all';
+  function applyFilter() {
+    document.querySelectorAll('.repo').forEach(r => { r.hidden = activeFilter !== 'all' && r.dataset.cat !== activeFilter; });
+  }
   document.querySelectorAll('.filters button').forEach(btn => btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.f;
     document.querySelectorAll('.filters button').forEach(b => b.classList.toggle('on', b === btn));
-    document.querySelectorAll('.repo').forEach(r => { r.hidden = btn.dataset.f !== 'all' && r.dataset.cat !== btn.dataset.f; });
+    applyFilter();
   }));
+
+  // "More on GitHub" — live list of public repos, newest push first.
+  // New public repos show up automatically. The static cards above stay as a fallback.
+  // To hide a repo without touching the site, add the GitHub topic "portfolio-hide".
+  // To set its category, add the topic "ai", "data" or "software".
+  (async function liveRepos() {
+    const HIDDEN = new Set([
+      'ecemy3', 'ecemy3.github.io', 'MHRS-hasta-doktor-yonetici-paneli',
+      // shown as featured cards above
+      'music-emotion-engine', 'litevision-studio', 'Fish_Object_Trackig_yolo_deepsort', 'gemini-doc-explainer-api', 'ai-research-agent',
+      // removed on request
+      'EventHub', 'OrderManagement', 'RecipeSuggestion', 'autonomous-treasure-hunter', 'ProLab1', 'idman-projesi-oop', 'k-t-phane', 'cardgame',
+    ]);
+    const CAT_NAMES = { ai: 'AI & ML', data: 'Data', software: 'Software' };
+    const LANG_COLORS = { Python: '#3572A5', 'C#': '#178600', JavaScript: '#f1e05a', TypeScript: '#3178c6', 'C++': '#f34b7d', Java: '#b07219', C: '#8a8a8a', 'Jupyter Notebook': '#DA5B0B', Go: '#00ADD8', Rust: '#dea584', Kotlin: '#A97BFF', Swift: '#F05138', Dart: '#00B4AB', HTML: '#e34c26', R: '#198CE7', Slides: '#d97706' };
+    const grid = document.querySelector('.repos');
+    // keep the hand-written titles / descriptions / categories from the static cards
+    const curated = {};
+    grid.querySelectorAll('.repo').forEach(a => {
+      const name = a.href.split('/').pop();
+      curated[name] = { title: a.querySelector('h4').textContent, desc: a.querySelector('p').textContent, cat: a.dataset.cat, lang: a.querySelector('.repo-meta span').textContent };
+    });
+    const guessCat = (r) => {
+      const t = r.topics || [];
+      for (const c of ['ai', 'data', 'software']) if (t.includes(c)) return c;
+      const text = `${r.name} ${r.description || ''} ${t.join(' ')}`.toLowerCase();
+      if (/\b(ai|ml|llm|rag|gpt|gemini|claude|agent|vision|detect|classif|neural|deep|model|yolo|transformer|nlp|speech|emotion|recogni)/.test(text)) return 'ai';
+      if (r.language === 'Jupyter Notebook' || /\b(data|analysis|analytics|eda|spark|kafka|etl|forecast|statistic)/.test(text)) return 'data';
+      return 'software';
+    };
+    const pretty = (name) => name.replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    try {
+      const res = await fetch('https://api.github.com/users/ecemy3/repos?per_page=100&sort=pushed');
+      if (!res.ok) return;
+      const repos = (await res.json())
+        .filter(r => !r.fork && !r.archived && !HIDDEN.has(r.name) && !(r.topics || []).includes('portfolio-hide'))
+        .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+      if (!repos.length) return;
+      const icon = grid.querySelector('.repo-top svg').outerHTML;
+      grid.innerHTML = repos.map(r => {
+        const c = curated[r.name] || {};
+        const cat = c.cat || guessCat(r);
+        const lang = c.lang || r.language || 'Code';
+        const desc = c.desc || r.description || 'Source code on GitHub.';
+        return `
+      <a class="repo" data-cat="${cat}" href="${esc(r.html_url)}" target="_blank" rel="noopener">
+        <div class="repo-top">${icon}<h4>${esc(c.title || pretty(r.name))}</h4><span class="arrow">↗</span></div>
+        <p>${esc(desc)}</p>
+        <div class="repo-meta"><span><i style="background:${LANG_COLORS[lang] || '#8a8a8a'}"></i>${esc(lang)}</span><span>${CAT_NAMES[cat]}</span></div>
+      </a>`;
+      }).join('');
+      applyFilter();
+    } catch (e) { /* offline or rate-limited: keep the static list */ }
+  })();
 
   // case study popups
   document.querySelectorAll('[data-case]').forEach(card => card.addEventListener('click', e => {
