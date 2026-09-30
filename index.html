@@ -359,6 +359,24 @@
   .case-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   @media (max-width: 560px) { .case-stats { grid-template-columns: 1fr 1fr; } }
 
+  /* live voice agent thumb */
+  .project-wide { grid-column: 1 / -1; flex-direction: row; }
+  .project-wide .thumb { flex: 0 0 48%; height: auto; min-height: 240px; }
+  .project-wide .p-body { padding: 26px 26px 24px; justify-content: center; }
+  .project-wide h4 { font-size: 20px; }
+  .project-wide .p-body p { font-size: 15px; margin-top: 8px; }
+  @media (max-width: 760px) { .project-wide { flex-direction: column; } .project-wide .thumb { min-height: 200px; } }
+  .live-pill { position: absolute; top: 12px; right: 12px; z-index: 3; display: inline-flex; align-items: center; gap: 6px; font: 500 11px "Geist Mono", monospace; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.14); }
+  .live-pill i { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; animation: blink 1.4s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: .25; } }
+  .orb { position: relative; width: 84px; height: 84px; z-index: 2; }
+  .orb .core { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #d8ccff, #7c5cff 45%, #3b1fb8 80%);
+    box-shadow: 0 0 40px rgba(124,92,255,.7); animation: orb-talk 1.6s ease-in-out infinite; }
+  .orb .ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(169,150,255,.6); animation: orb-wave 2.4s ease-out infinite; }
+  .orb .r2 { animation-delay: .8s; } .orb .r3 { animation-delay: 1.6s; }
+  @keyframes orb-talk { 0%,100% { transform: scale(1); } 30% { transform: scale(1.08); } 55% { transform: scale(.97); } 75% { transform: scale(1.05); } }
+  @keyframes orb-wave { from { transform: scale(1); opacity: .8; } to { transform: scale(2.1); opacity: 0; } }
+
   /* booking modal */
   #booking { position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     display: grid; place-items: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s; }
@@ -375,7 +393,7 @@
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
-    .bars i, .avatar .wave-bars i, .va-dot { animation: none; }
+    .bars i, .avatar .wave-bars i, .va-dot, .orb .core, .orb .ring, .live-pill i { animation: none; }
     #intro { display: none; }
     .hero .reveal { filter: none; }
   }
@@ -512,6 +530,20 @@
   <section id="projects">
     <h2 class="sec-title reveal"><span class="slash">02</span>Projects</h2>
     <div class="projects">
+
+      <a class="project project-wide reveal" href="#case-live" data-case="case-live">
+        <div class="thumb t-dark" style="background:radial-gradient(90% 90% at 50% 55%,#1e1450,#0a0a0a 75%)">
+          <span class="tag">Open source · Case study</span>
+          <span class="live-pill"><i></i>LIVE</span>
+          <div class="orb"><span class="ring"></span><span class="ring r2"></span><span class="ring r3"></span><span class="core"></span></div>
+        </div>
+        <div class="p-body">
+          <h4>Real-Time Multimodal Voice Agent <span class="arrow">→</span></h4>
+          <p>Talk to it, show it your camera or screen, interrupt it mid-sentence — a live voice agent that uses tools, researches with Google Search and assists call-center agents.</p>
+          <div class="chips"><span class="chip">Gemini 3.8 Live</span><span class="chip">Google ADK</span><span class="chip">Vertex AI</span><span class="chip">WebSockets</span><span class="chip">FastAPI</span></div>
+          <span class="read-more">Read case study →</span>
+        </div>
+      </a>
 
       <a class="project reveal" href="#case-ser" data-case="case-ser">
         <div class="thumb t-dark" style="background:radial-gradient(120% 90% at 50% 110%,#2a1a6e,#0d0d0d 70%)">
@@ -924,6 +956,42 @@
   </div>
 </div>
 
+<div class="case" id="case-live" role="dialog" aria-modal="true" aria-labelledby="case-live-title">
+  <div class="case-box">
+    <button class="case-close" aria-label="Close">✕</button>
+    <div class="kicker">OPEN SOURCE · SEPTEMBER 2026</div>
+    <h3 id="case-live-title">Real-Time Multimodal Voice Agent with Gemini 3.8 Live</h3>
+    <p class="intro">A voice agent that <strong>listens, sees and acts in real time</strong> — built with Google ADK and Gemini 3.8 Live on Vertex AI. Audio streams both ways over WebSockets, users can interrupt naturally, and the agent calls tools, reads the camera or shared screen, and hands deep questions to a research sub-agent.</p>
+
+    <div class="case-stats">
+      <div><b>6</b><span>build stages</span></div>
+      <div><b>4 · 7</b><span>scenarios · tools</span></div>
+      <div><b>1 fps</b><span>camera / screen vision</span></div>
+      <div><b>3–6 s</b><span>agent-assist insights</span></div>
+    </div>
+
+    <h5>Architecture</h5>
+    <div class="case-flow"><span>Mic · 16 kHz PCM16</span>→<span>WebSocket</span>→<span>FastAPI + ADK run_live</span>→<span>Gemini 3.8 Live</span>→<span>24 kHz voice</span></div>
+    <div class="case-flow" style="margin-top:8px"><span>Camera / screen · 1 fps</span>→<span>Tools</span>→<span>Flash + Google Search</span>→<span>Action cards</span></div>
+
+    <h5>What I built</h5>
+    <div class="case-steps">
+      <div class="case-step"><span class="n">01</span><div><b>Streaming voice with barge-in</b><p>AudioWorklet captures 100 ms PCM16 chunks; replies play back gap-free at 24 kHz. When the user interrupts, playing and queued audio stop instantly.</p></div></div>
+      <div class="case-step"><span class="n">02</span><div><b>Tools &amp; action cards</b><p>Four scenarios (customer service, restaurant booking, IT support, general assistant) with seven tools. The agent asks for confirmation before irreversible actions like refunds or freezing a card, and every tool returns structured status / retryable responses.</p></div></div>
+      <div class="case-step"><span class="n">03</span><div><b>Camera &amp; screen understanding</b><p>Frames are sent at 1 fps with sliding-window context compression — e.g. the agent reads an order number held up to the camera and looks it up.</p></div></div>
+      <div class="case-step"><span class="n">04</span><div><b>Research sub-agent</b><p>A Gemini 3.8 Flash tool with Google Search grounding handles up-to-date or deep questions. The voice model gets a short summary; sources go only to the UI. Async tool calls keep the conversation going while it researches.</p></div></div>
+      <div class="case-step"><span class="n">05</span><div><b>Call-center Agent Assist</b><p>A dedicated live transcription model plus per-turn parallel analysis: sentiment, emotion, intent, next-best action and risk flags in 3–6 s, and a one-click CRM summary. The emotion analyzer is a pluggable interface, so a custom speech-emotion model can be dropped in.</p></div></div>
+      <div class="case-step"><span class="n">06</span><div><b>Production hardening</b><p>Cloud Run deployment with least-privilege service accounts, origin checks, per-IP daily limits, concurrency and session-length caps — plus an embeddable “talking orb” widget (Shadow DOM, TR / EN).</p></div></div>
+    </div>
+
+    <div class="case-links">
+      <a class="case-btn primary" href="https://github.com/ecemy3/gemini-3.8-live-voice-agent" target="_blank" rel="noopener">GitHub repo ↗</a>
+    </div>
+
+    <div class="chips" style="margin-top:22px"><span class="chip">Gemini 3.8 Live</span><span class="chip">Gemini 3.8 Flash</span><span class="chip">Google ADK</span><span class="chip">Vertex AI</span><span class="chip">FastAPI</span><span class="chip">WebSockets</span><span class="chip">Web Audio API</span><span class="chip">Google Search grounding</span><span class="chip">Cloud Run</span></div>
+  </div>
+</div>
+
 <div id="booking" role="dialog" aria-modal="true" aria-label="Book a meeting">
   <div class="booking-box">
     <button class="booking-close" aria-label="Close">✕</button>
@@ -971,7 +1039,7 @@
     const HIDDEN = new Set([
       'ecemy3', 'ecemy3.github.io', 'MHRS-hasta-doktor-yonetici-paneli',
       // shown as featured cards above
-      'music-emotion-engine', 'litevision-studio', 'Fish_Object_Trackig_yolo_deepsort', 'gemini-doc-explainer-api', 'ai-research-agent',
+      'music-emotion-engine', 'gemini-3.8-live-voice-agent', 'litevision-studio', 'Fish_Object_Trackig_yolo_deepsort', 'gemini-doc-explainer-api', 'ai-research-agent',
       // removed on request
       'EventHub', 'OrderManagement', 'RecipeSuggestion', 'autonomous-treasure-hunter', 'ProLab1', 'idman-projesi-oop', 'k-t-phane', 'cardgame',
     ]);
