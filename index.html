@@ -330,10 +330,12 @@
   @media (max-width: 560px) { .repos { grid-template-columns: 1fr; } }
 
   /* speaking */
-  .talks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .talks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .inline-link { color: var(--fg); box-shadow: inset 0 -1px 0 var(--accent-deep); transition: color .2s; }
+  .inline-link:hover { color: var(--accent-deep); }
   .talk { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: transform .25s, border-color .25s; }
   a.talk:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
-  .talk-img { height: 330px; overflow: hidden; background: #111; }
+  .talk-img { height: 300px; overflow: hidden; background: #111; }
   .talk-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transition: transform .5s; }
   .talk:hover .talk-img img { transform: scale(1.03); }
   .talk-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
@@ -342,6 +344,7 @@
   .talk-body h4 .arrow { color: var(--soft); }
   .talk-body p { font-size: 14px; color: var(--muted); margin-top: 6px; }
   .role-pill { align-self: flex-start; margin-top: 14px; font: 500 11px "Geist Mono", monospace; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent-deep); }
+  @media (max-width: 900px) { .talks { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 760px) { .talks { grid-template-columns: 1fr; } .talk-img { height: 260px; } }
 
   .thumb-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
@@ -453,7 +456,7 @@
       <span class="hl">Applied AI Engineer</span> at <strong>Oloid Technology</strong> — voice agents for enterprise customer service, speech-to-text for Turkish telephony audio, and production-ready, on-premise speech systems.
     </p>
     <p class="sub reveal">
-      Computer Engineering graduate from Kocaeli University. I've worked on computer vision, medical imaging, LLM agents and real-time data pipelines — and I organize AI &amp; cloud events as part of Google Developer Groups Kocaeli.
+      Computer Engineering graduate from Kocaeli University. I've worked on computer vision, medical imaging, LLM agents and real-time data pipelines — I'm the founder of <a class="inline-link" href="https://frekans.dev" target="_blank" rel="noopener">Frekans</a>, a small creative studio, and I organize AI &amp; cloud events as part of Google Developer Groups Kocaeli.
     </p>
 
     <div class="socials reveal">
@@ -484,6 +487,17 @@
           <li>Building and testing <strong>voice agent</strong> solutions for enterprise customer service use cases.</li>
           <li>Researching and benchmarking <strong>speech-to-text</strong> models for Turkish telephony audio.</li>
           <li>Evaluating open-source speech technologies for <strong>on-premise</strong> voice AI deployments.</li>
+        </ul>
+      </div>
+
+      <div class="job current reveal">
+        <div class="job-head"><h4><a class="inline-link" href="https://frekans.dev" target="_blank" rel="noopener">Frekans</a></h4><span class="meta">Present · Creative studio · frekans.dev</span></div>
+        <div class="role">Founder <span class="badge">now</span></div>
+        <ul>
+          <li>Founded a small creative studio that turns everyday ideas into digital products people open every day — web, 3D and AI.</li>
+          <li>Built <strong>Frekans Live</strong>, a live translation system that turns English talks into Turkish subtitles in real time — used at GDG events.</li>
+          <li>Technical support sponsor of GDG Mersin, GDG Antalya and GDG Kocaeli events with Frekans Live.</li>
+          <li>Building <strong>Komşu</strong>, a neighborhood platform (first pilot in İzmit), and <strong>Croffino</strong>, a café menu &amp; loyalty app.</li>
         </ul>
       </div>
 
@@ -817,6 +831,15 @@
           <div class="kicker">BUILD WITH AI TÜRKİYE · MAY 2026</div>
           <h4>Designing Smart Decision Engines with Vibe Coding <span class="arrow">↗</span></h4>
           <p>Speaker &amp; instructor — hands-on training session for Google Developer Communities Turkey.</p>
+          <span class="role-pill">Speaker · Instructor</span>
+        </div>
+      </a>
+      <a class="talk reveal" href="https://github.com/ecemy3/Google-bwai" target="_blank" rel="noopener">
+        <div class="talk-img"><img style="object-position:center 30%" src="img/talk-gdg-hatay.jpg" alt="Build with AI · GDG Hatay poster — Ecem Yalçın" loading="lazy"></div>
+        <div class="talk-body">
+          <div class="kicker">BUILD WITH AI · GDG HATAY · MAY 2026</div>
+          <h4>Designing Smart Decision Engines with Vibe Coding <span class="arrow">↗</span></h4>
+          <p>Speaker &amp; instructor — online training session for Google Developer Group Hatay, streamed on their YouTube channel.</p>
           <span class="role-pill">Speaker · Instructor</span>
         </div>
       </a>
